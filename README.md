@@ -46,6 +46,8 @@ This is a restaurant list that you can add and edit your favorite restaurants on
 
 - Node.js 16.13.2
 - Express 4.17.2
-- Express-Handlebars 6.0.2
+- Express-Handlebars 4.0.2
 - Bootstrap 4.3.1
 - Font-awesome 5.8.1
+- mongoose 6.2.1
+- body-parser 1.19.1
