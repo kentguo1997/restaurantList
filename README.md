@@ -2,13 +2,15 @@
 
 ## Introduction
 
-This is a restaurant list of several restaurant I recommend in Taipei. 
-You can browse the list for restaurants' introductions and click them for detailed information, and you can also quickly search the restaurants by keyword. 
+This is a restaurant list that you can add and edit your favorite restaurants on it. Just browse the list for restaurants' introductions and detailed information, and you can also quickly search the restaurants by keyword. 
 
 ### Function
 
 - Browse all restaurants on the list 
-- Click any one of the restaurants for detailed information(ex. address, phone, description...etc.) 
+- Click 'Detail' button for detailed information(ex. address, phone, description, connect to Google Map...etc.) 
+- Click 'Add Restaurant' button to add a  restaureant to the list
+- Click 'Edit' button to edit the info of the restaurant you chose
+- Click 'Index' button to remove the restaurant you chose from the list
 - Type keyword of restaurants' name or category into search bar, and you can quickly get the results corresponding the keyword you searched. 
 
 ## Running Locally
