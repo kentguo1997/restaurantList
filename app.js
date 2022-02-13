@@ -3,7 +3,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const restaurantsList = require('./restaurant.json')
+const Restaurant = require('./models/restaurant')
+
 
 // Define server related variables
 const port = 3000
@@ -25,13 +26,19 @@ db.once('open', () => {
 
 
 // setting template engine
-app.engine('handlebars', exphbs.engine({ extname: 'handlebars', defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({ extname: 'handlebars', defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+
 
 // route setting 
 app.get('/', (req, res) => {
-  res.render('index', { restaurantsList: restaurantsList.results })
+  Restaurant.find()  // get all data from Model
+    .lean()
+    .then( restaurants => res.render('index', { restaurants })) 
+    .catch(error => console.log(error))
 })
+
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantsList.results.find( restaurant => restaurant.id.toString() === req.params.restaurant_id ) 
