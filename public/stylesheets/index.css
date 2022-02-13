@@ -79,6 +79,28 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.items a {
+  font-size: 12px;
+  color: #9b4b4b;
+  text-decoration: none;
+}
+
+.items a:hover {
+  font-weight: bold;
+}
+
+.items form button {
+  border: none;
+  background-color: #9b4b4b;
+  color: #ffffff;
+  font-size: 12px;
+  border-radius: 2.5px;
+}
+
+.items form button:hover {
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 992px) {
   
   .card img{

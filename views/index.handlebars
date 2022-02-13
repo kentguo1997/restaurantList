@@ -38,9 +38,12 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
             </div>
-            <div class="items">
-              <a href="/restaurants/{{this._id}}/edit">Edit</a>
-              <a href="/restaurants/{{this._id}}">Detail</a>
+            <div class="items d-flex justify-content-end align-items-center">
+              <a href="/restaurants/{{this._id}}/edit" class="mx-2">Edit</a>
+              <a href="/restaurants/{{this._id}}" class="mx-2">Detail</a>
+              <form action="/restaurants/{{this._id}}/delete" method="POST" class="mx-2 mb-2">
+                <button type="submit">Delete</button>
+              </form>
             </div>
           </div>
         {{/each}}
