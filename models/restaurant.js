@@ -43,3 +43,6 @@ const restaurantSchema = new Schema({
     required: true
   }
 })
+
+// export this Schema for other files' use
+module.exports = mongoose.model('Restaurant', restaurantSchema)
