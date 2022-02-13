@@ -1,0 +1,45 @@
+<div class="container d-flex flex-column justify-content-center align-items-center mt-3">
+  <form action="/restaurants" method="POST">
+    <!--Restaurant Name -->
+    <input type="text" placeholder="請輸入餐廳名稱" name="name">
+    <!--Category -->
+    <div class="category mt-4" style="max-width: 240px;">
+      <label for="categories" class="mb-0">請選擇餐廳類別<br>(沒有符合選項, 可自行輸入)</label>
+      <input list="category" class="form-control mt-0" name="category" id="categories">
+      <datalist id="category">
+        <option>中東料理</option>
+        <option>日本料理</option>
+        <option>義式餐廳</option>
+        <option>美式</option>
+        <option>酒吧</option>
+        <option>咖啡</option>
+      </datalist>
+    </div>
+    <!-- Image -->
+    <div class="image mt-4" style="max-width: 240px;">
+      <label for="img" class="mb-0">請輸入餐廳照片的網址</label>
+      <input type="url" id="img" name="image" class="mt-0">
+    </div>
+    <!-- location -->
+    <input type="text" placeholder="請輸入餐廳地址" name="location" style="display: block;" class="mt-4">
+    <!-- phone -->
+    <input type="text" placeholder="請輸入餐廳電話" name="phone" style="display: block;" class="mt-4">
+    <!-- google_map -->
+    <div class="google_map mt-4" style="max-width: 240px;">
+      <label for="map" class="mb-0">請輸入餐廳在Google Map的網址</label>
+      <input type="url" id="map" name="google_map" class="mt-0">
+    </div>
+    <!-- rating -->
+    <div class="rating mt-4" style="max-width: 240px;">
+      <label for="quantity" class="mb-0">請填寫餐廳評分 (介於 1 到 10 分)</label>
+      <input type="number" id="quantity" name="rating" min="1" max="10" style="display: block;" class="mt-0">
+    </div>
+    <!-- description -->
+    <div class="description mt-4 mb-4">
+      <label class="mb-0" for="description" rows="3" cols="20" style="display: block;">請填寫餐廳簡介</label>
+      <textarea id="description" name="description" class="mt-0"></textarea>
+    </div>
+    <!-- Create Button -->
+    <button type="submit">Create</button>
+  </form>
+</div>
