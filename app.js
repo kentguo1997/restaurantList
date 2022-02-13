@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const Restaurant = require('./models/restaurant')
-const restaurant = require('./models/restaurant')
+
 
 
 // Define server related variables
@@ -142,16 +142,23 @@ app.post('/restaurants/:id/delete', (req, res) => {
 // search function
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
-  const restaurants = restaurantsList.results.filter( restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLocaleLowerCase()) || restaurant.category.includes(keyword)
-  })
-
-  // Whether there are corresponding results or not 
-  if(restaurants.length === 0) {
-    res.render('error', { keyword: keyword })
-  } else {
-    res.render('index', { restaurantsList: restaurants, keyword: keyword })
-  }
+  let filteredRestaurants = []
+  
+  Restaurant.find()
+    .lean()
+    .then( restaurants => {
+      filteredRestaurants = restaurants.filter( restaurant => {
+        return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
+      })
+      
+      // Whether there are corresponding results or not 
+      if (filteredRestaurants.length === 0) {
+        res.render('error', { keyword: keyword })
+      } else {
+        res.render('index', { restaurants: filteredRestaurants, keyword })
+      }
+    })
+    .catch(error => console.log(error))
 })
 
 // setting static files
