@@ -161,8 +161,10 @@ app.get('/search', (req, res) => {
     .catch(error => console.log(error))
 })
 
+
 // setting static files
 app.use(express.static('public'))
+
 
 // start and listen the server
 app.listen(port, () => {
