@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const Restaurant = require('./models/restaurant')
+const restaurant = require('./models/restaurant')
 
 
 // Define server related variables
@@ -82,6 +83,48 @@ app.get('/restaurants/:id', (req, res) => {
     .lean()
     .then( restaurant => res.render('show', {restaurant}) )
     .catch( error => console.log(error) )
+})
+
+
+// edit restaurant
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  // get id from params 
+  const id = req.params.id
+  
+  // get attributes from req.body 
+  const name = req.body.name
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+  
+  Restaurant.findById(id)
+    .then(restaurant =>{
+      restaurant.name = name
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+
+      restaurant.save()
+    }) 
+    .then( () => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
 })
 
 
