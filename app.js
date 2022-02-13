@@ -1,11 +1,27 @@
 // Include packages in the project
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const restaurantsList = require('./restaurant.json')
 
 // Define server related variables
 const port = 3000
+
+
+// connect to database by mongoose
+mongoose.connect('mongodb://localhost/restaurant_list')
+
+// get db connection 
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 
 // setting template engine
