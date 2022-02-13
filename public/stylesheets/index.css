@@ -101,6 +101,16 @@ header {
   opacity: 0.5;
 }
 
+#add_btn {
+  color: #9b4b4b;
+  text-decoration: none;
+}
+
+#add_btn:hover {
+  color: red;
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 992px) {
   
   .card img{
