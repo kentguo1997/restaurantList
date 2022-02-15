@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 
 
@@ -32,8 +33,9 @@ app.engine('handlebars', exphbs({ extname: 'handlebars', defaultLayout: 'main' }
 app.set('view engine', 'handlebars')
 
 
-// setting body-parser
+// setting app use for included sources
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 
 // route setting 
@@ -51,25 +53,18 @@ app.get('/restaurants/new', (req, res) => {
 
 app.post('/restaurants', (req, res) => {
   // get attributes from req.body 
-   const name = req.body.name
-   const category = req.body.category
-   const image = req.body.image
-   const location = req.body.location
-   const phone = req.body.phone
-   const google_map = req.body.google_map
-   const rating = req.body.rating
-   const description = req.body.description
+  const { name, category, image, location, phone, google_map, rating, description} = req.body
    
-   return Restaurant.create({
-     name: name, 
-     category: category, 
-     image: image,
-     location: location,
-     phone: phone,
-     google_map: google_map,
-     rating: rating,
-     description: description
-   })
+  return Restaurant.create({
+    name, 
+    category, 
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description
+  })
      .then( () => res.redirect('/') )
      .catch(error => console.log(error))
 })
@@ -96,19 +91,12 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   // get id from params 
   const id = req.params.id
   
   // get attributes from req.body 
-  const name = req.body.name
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+  const { name, category, image, location, phone, google_map, rating, description } = req.body
   
   Restaurant.findById(id)
     .then(restaurant =>{
@@ -129,7 +117,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 
 
 // delete restaurant
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
 
   Restaurant.findById(id)
