@@ -2,7 +2,7 @@ header {
   overflow: hidden;
 }
 
-.navbar .navbar-brand {
+.navbar .navbar-brand, .navbar #add_btn {
   color: #4592af;
 }
 

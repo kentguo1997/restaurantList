@@ -9,6 +9,7 @@ const Restaurant = require('../../models/restaurant')
 router.get ('/', (req, res) => {
   Restaurant.find()  // get all data from Model
     .lean()
+    .sort({ name: 'asc' })
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
