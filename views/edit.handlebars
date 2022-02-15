@@ -1,16 +1,17 @@
-<div class="container d-flex flex-column justify-content-center align-items-center mt-3">
+<h1 class="mb-0 restaurant-show-title">更新餐廳資訊</h1>
+<div class="container d-flex flex-column justify-content-center align-items-center mt-1">
   <form action="/restaurants/{{restaurant._id}}/?_method=PUT" method="POST">
 
     <!--Restaurant Name -->
     <div class="name d-flex flex-column">
       <label for="name" class="mb-0">餐廳名稱</label>
-      <input type="text" id="name" value="{{restaurant.name}}" placeholder="更改後餐廳名稱" name="name" class="mt-0">
+      <input type="text" id="name" value="{{restaurant.name}}" name="name" class="mt-0">
     </div>
 
     <!--Category -->
     <div class="category mt-4" style="max-width: 240px;">
       <label for="categories" class="mb-0">餐廳類別</label>
-      <input list="category" id="categories" value="{{restaurant.category}}" placeholder="更改後的餐廳類別(可自行輸入)" name="category" class="form-control mt-0" >
+      <input list="category" id="categories" value="{{restaurant.category}}" name="category" class="form-control mt-0" >
       <datalist id="category">
         <option>中東料理</option>
         <option>日本料理</option>
@@ -24,25 +25,25 @@
     <!-- Image -->
     <div class="image mt-4 d-flex flex-column" style="max-width: 320px;">
       <label for="img" class="mb-0">餐廳照片網址</label>
-      <input type="url" id="img" value="{{restaurant.image}}" name="image" placeholder="更改後的餐廳照片網址" class="mt-0">
+      <input type="url" id="img" value="{{restaurant.image}}" name="image" class="mt-0">
     </div>
 
     <!-- location -->
     <div class="location d-flex flex-column mt-4">
       <label for="location" class="mb-0">餐廳地址</label>
-      <input type="text" id="location" value="{{restaurant.location}}" placeholder="更改後的餐廳地址" name="location" class="mt-0">
+      <input type="text" id="location" value="{{restaurant.location}}" name="location" class="mt-0">
     </div>
 
     <!-- phone -->
     <div class="phone d-flex flex-column mt-4">
       <label for="phone" class="mb-0">餐廳電話</label>
-      <input type="text" id="phone" value="{{restaurant.phone}}" placeholder="更改後的餐廳電話" name="phone" class="mt-0">
+      <input type="text" id="phone" value="{{restaurant.phone}}" name="phone" class="mt-0">
     </div>
 
     <!-- google_map -->
     <div class="google_map mt-4 d-flex flex-column" style="max-width: 320px;">
       <label for="map" class="mb-0">Google Map網址</label>
-      <input type="url" id="map" value="{{restaurant.google_map}}" name="google_map" placeholder="更改後的Google Map網址" class="mt-0">
+      <input type="url" id="map" value="{{restaurant.google_map}}" name="google_map" class="mt-0">
     </div>
 
     <!-- rating -->
@@ -57,7 +58,9 @@
       <textarea id="description"name="description" class="mt-0" rows="10" cols="30">{{restaurant.description}}</textarea>
     </div>
 
-    <!-- Create Button -->
-    <button type="submit">Update</button>
+    <!-- Update Button -->
+    <div class="button text-center">
+      <button type="submit">Update</button>
+    </div>
   </form>
 </div>
