@@ -2,6 +2,8 @@
 const express = require('express')
 const router = express.Router()
 
+// Include User Model
+const User = require('../../models/user')
 
 // router setting ('/users')
 
@@ -21,9 +23,29 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  res.send('Register')
+  const name = req.body.name || ''
+  const { email, password } = req.body
+  
+  User.findOne({email})
+    .then( user => {
+      // the user already exists 
+      if (user) {
+        console.log('User already exists!')
+        return res.render('register', {
+          name,
+          email
+        })
+      }
+      // create a new user
+      User.create({
+        name,
+        email,
+        password
+      })
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err))  
+    })
 })
-
 
 
 
