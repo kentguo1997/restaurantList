@@ -27,12 +27,19 @@ app.set('view engine', 'handlebars')
 // using middleware below 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
 usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated
+  res.locals.user = req.user
+  next() 
+})
+
 
 
 app.use(express.static('public'))
