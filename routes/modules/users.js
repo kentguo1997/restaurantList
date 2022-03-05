@@ -17,6 +17,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
+  failureFlash: true,
   failureRedirect: '/users/login'
 }))
 
@@ -28,16 +29,32 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const name = req.body.name || ''
-  const { email, password } = req.body
+  const { email, password, confirmPassword } = req.body
+  let error = ''
+
   
+  if (password !== confirmPassword) {
+    error = 'Password do not match Confirm Password!' 
+    return res.render('register', {
+      name,
+      email,
+      password,
+      confirmPassword,
+      error
+    })
+  }
+
   User.findOne({email})
     .then( user => {
       // the user already exists 
       if (user) {
-        console.log('User already exists!')
+        error =  'The user already exists!' 
         return res.render('register', {
           name,
-          email
+          email,
+          password,
+          confirmPassword,
+          error
         })
       }
       // create a new user
@@ -55,6 +72,7 @@ router.post('/register', (req, res) => {
 // Logout
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', 'Logged out successfully!')
   res.redirect('/users/login')
 })
 
