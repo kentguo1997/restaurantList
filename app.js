@@ -1,6 +1,7 @@
 // Include packages in the project
 const express = require('express')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -31,6 +32,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app)
+
 
 app.use(express.static('public'))
 app.use(routes)
