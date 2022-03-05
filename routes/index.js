@@ -11,12 +11,15 @@ const sorts = require('./modules/sorts')
 const search = require('./modules/search')
 const users = require('./modules/users')
 
+// Include Authenticator 
+const { authenticator } = require('../middleware/auth')
+
 // use routers included
-router.use('/restaurants', restaurants)
+router.use('/restaurants', authenticator, restaurants)
 router.use('/sorts', sorts)
 router.use('/search', search)
 router.use('/users', users)
-router.use('/', home)
+router.use('/', authenticator, home)
 
 // export router
 module.exports = router
