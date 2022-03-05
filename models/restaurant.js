@@ -1,3 +1,6 @@
+// Include User Model
+const User = require('./user')
+
 // define the Schema of all data
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -38,6 +41,12 @@ const restaurantSchema = new Schema({
   }, 
   description: {
     type: String,
+    required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: User,
+    index: true,
     required: true
   }
 })

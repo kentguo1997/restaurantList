@@ -2,12 +2,13 @@
 const express = require('express')
 const router = express.Router()
 
-// Include restaurant model to get data and show on homepage
+// Include restaurant model
 const Restaurant = require('../../models/restaurant')
 
 // router setting ('/')
 router.get ('/', (req, res) => {
-  Restaurant.find()  // get all data from Model
+  const userId = req.user._id
+  Restaurant.find({ userId })  
     .lean()
     .sort({ name: 'asc' })
     .then(restaurants => res.render('index', { restaurants }))

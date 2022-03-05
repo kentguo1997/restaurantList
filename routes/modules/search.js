@@ -12,8 +12,11 @@ const Restaurant = require('../../models/restaurant')
 router.get('/', (req, res) => {
   const keyword = req.query.keyword.trim()
   let filteredRestaurants = []
+  
+  // get userId
+  const userId = req.user._id
 
-  Restaurant.find()
+  Restaurant.find({ userId })
     .lean()
     .then(restaurants => {
       filteredRestaurants = restaurants.filter(restaurant => {
@@ -22,14 +25,13 @@ router.get('/', (req, res) => {
 
       // Whether there are corresponding results or not 
       if (filteredRestaurants.length === 0) {
-        res.render('error', { keyword: keyword })
+        res.render('error', { keyword })
       } else {
         res.render('index', { restaurants: filteredRestaurants, keyword })
       }
     })
     .catch(error => console.log(error))
 })
-
 
 
 // export router 
