@@ -1,8 +1,13 @@
 // Include packages in the project
 const express = require('express')
+const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -18,10 +23,16 @@ app.engine('handlebars', exphbs({ extname: 'handlebars', defaultLayout: 'main' }
 app.set('view engine', 'handlebars')
 
 
-// setting app use for included packages
-app.use(express.static('public'))
+// using middleware below 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+
+app.use(express.static('public'))
 app.use(routes)
 
 
