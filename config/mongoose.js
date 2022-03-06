@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 
 // connect to database by mongoose
-mongoose.connect('mongodb://localhost/restaurant_list')
+mongoose.connect(process.env.MONGODB_URI)
 
 
 // get db connection 

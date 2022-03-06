@@ -17,7 +17,7 @@ require('./config/mongoose')
 const app = express()
 
 // Define server related variables
-const port = 3000
+const port = process.env.PORT
 
 
 // setting template engine
