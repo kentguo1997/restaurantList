@@ -5,7 +5,6 @@ const router = express.Router()
 // Include restaurant model to get data and show on homepage
 const Restaurant = require('../../models/restaurant')
 
-
 // router setting ('/restaurants')
 
 // add new restaurant
@@ -14,7 +13,7 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  // get attributes from req.body 
+  // get attributes from req.body
   const { name, category, image, location, phone, google_map, rating, description } = req.body
   // get userId
   const userId = req.user._id
@@ -34,7 +33,6 @@ router.post('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
 // show restaurant's detail
 router.get('/:id', (req, res) => {
   const _id = req.params.id
@@ -45,7 +43,6 @@ router.get('/:id', (req, res) => {
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
-
 
 // edit restaurant
 router.get('/:id/edit', (req, res) => {
@@ -59,13 +56,13 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  // get _id from params 
+  // get _id from params
   const _id = req.params.id
-  
+
   // get userId
   const userId = req.user._id
 
-  // get attributes from req.body 
+  // get attributes from req.body
   const { name, category, image, location, phone, google_map, rating, description } = req.body
 
   Restaurant.findOne({ _id, userId })
@@ -85,7 +82,6 @@ router.put('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
 // delete restaurant
 router.delete('/:id', (req, res) => {
   const _id = req.params.id
@@ -97,7 +93,5 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-// export router 
+// export router
 module.exports = router

@@ -12,7 +12,7 @@ const search = require('./modules/search')
 const users = require('./modules/users')
 const auth = require('./modules/auth')
 
-// Include Authenticator 
+// Include Authenticator
 const { authenticator } = require('../middleware/auth')
 
 // use routers included

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const UsersSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   email: {
     type: String,
@@ -18,7 +18,6 @@ const UsersSchema = new Schema({
     default: Date.now
   }
 })
-
 
 // export this Schema for other files' use
 module.exports = mongoose.model('User', UsersSchema)

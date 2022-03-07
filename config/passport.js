@@ -9,7 +9,6 @@ const bcrypt = require('bcryptjs')
 // Include User Model for authentication
 const User = require('../models/user')
 
-
 // export as a function
 module.exports = app => {
   // Initialization of Passport
@@ -21,7 +20,7 @@ module.exports = app => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false, req.flash('loginError', 'User not found!') )
+          return done(null, false, req.flash('loginError', 'User not found!'))
         }
         bcrypt.compare(password, user.password).then(isMatched => {
           if (!isMatched) {
@@ -31,8 +30,7 @@ module.exports = app => {
         return done(null, user)
       })
       .catch(err => done(err, false))
-  })) 
-  
+  }))
 
   // Setting FacebookStrategy
   passport.use(new FacebookStrategy({
@@ -42,7 +40,7 @@ module.exports = app => {
     profileFields: ['email', 'displayName']
   }, (accessToken, refreshToken, profile, done) => {
     const { email, name } = profile._json
-    
+
     User.findOne({ email })
       .then(user => {
         if (user) return done(null, user)
@@ -59,9 +57,7 @@ module.exports = app => {
           .then(user => done(null, user))
           .catch(err => done(err, null))
       })
-    
   }))
-
 
   // serialization & deserialization
   passport.serializeUser((user, done) => {

@@ -2,7 +2,7 @@
 const express = require('express')
 const router = express.Router()
 
-// Include passport 
+// Include passport
 const passport = require('passport')
 
 // Include bcryptjs
@@ -24,7 +24,6 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login'
 }))
 
-
 // Register
 router.get('/register', (req, res) => {
   res.render('register')
@@ -35,9 +34,8 @@ router.post('/register', (req, res) => {
   const { email, password, confirmPassword } = req.body
   let error = ''
 
-  
   if (password !== confirmPassword) {
-    error = 'Password do not match Confirm Password!' 
+    error = 'Password do not match Confirm Password!'
     return res.render('register', {
       name,
       email,
@@ -47,11 +45,11 @@ router.post('/register', (req, res) => {
     })
   }
 
-  User.findOne({email})
-    .then( user => {
-      // the user already exists 
+  User.findOne({ email })
+    .then(user => {
+      // the user already exists
       if (user) {
-        error =  'The user already exists!' 
+        error = 'The user already exists!'
         return res.render('register', {
           name,
           email,
@@ -74,7 +72,6 @@ router.post('/register', (req, res) => {
     })
 })
 
-
 // Logout
 router.get('/logout', (req, res) => {
   req.logout()
@@ -82,6 +79,5 @@ router.get('/logout', (req, res) => {
   res.redirect('/users/login')
 })
 
-
-// export router 
+// export router
 module.exports = router

@@ -6,15 +6,14 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 // router setting ('/')
-router.get ('/', (req, res) => {
+router.get('/', (req, res) => {
   const userId = req.user._id
-  Restaurant.find({ userId })  
+  Restaurant.find({ userId })
     .lean()
     .sort({ name: 'asc' })
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
 
-
-// export router 
+// export router
 module.exports = router

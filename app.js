@@ -19,13 +19,11 @@ const app = express()
 // Define server related variables
 const port = process.env.PORT
 
-
 // setting template engine
 app.engine('handlebars', exphbs({ extname: 'handlebars', defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-
-// using middleware below 
+// using middleware below
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
@@ -42,14 +40,11 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
   res.locals.loginError = req.flash('loginError')
-  next() 
+  next()
 })
-
-
 
 app.use(express.static('public'))
 app.use(routes)
-
 
 // start and listen the server
 app.listen(port, () => {

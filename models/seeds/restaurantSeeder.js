@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Include mongoose.js & Models & restaurant.json
 const db = require('../../config/mongoose')
 const Restaurant = require('../restaurant')
-const User = require('../user') 
+const User = require('../user')
 const restaurantsList = require('../../restaurant.json')
 
 // Include bcryptjs
@@ -15,12 +15,12 @@ const bcrypt = require('bcryptjs')
 // Define seed users
 const SEED_USERS = [
   {
-    name: 'seedUser1', 
+    name: 'seedUser1',
     email: 'user1@example.com',
-    password: '12345678', 
+    password: '12345678',
     ownedRestaurants: restaurantsList.results.slice(0, 3)
 
-  }, 
+  },
   {
     name: 'seedUser2',
     email: 'user2@example.com',
@@ -41,10 +41,10 @@ db.once('open', () => {
         email: seedUser.email,
         password: hash
       }))
-      .then( user => {
+      .then(user => {
         const userId = user._id
         seedUser.ownedRestaurants.forEach(restaurant => {
-          restaurant['userId'] = userId
+          restaurant.userId = userId
         })
         return Restaurant.create(seedUser.ownedRestaurants)
       })
@@ -53,4 +53,3 @@ db.once('open', () => {
     process.exit()
   })
 })
-

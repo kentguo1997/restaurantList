@@ -2,17 +2,15 @@
 const express = require('express')
 const router = express.Router()
 
-
 // Include restaurant model to get data and show on homepage
 const Restaurant = require('../../models/restaurant')
-
 
 // router setting ('/search')
 // search function
 router.get('/', (req, res) => {
   const keyword = req.query.keyword.trim()
   let filteredRestaurants = []
-  
+
   // get userId
   const userId = req.user._id
 
@@ -23,7 +21,7 @@ router.get('/', (req, res) => {
         return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
       })
 
-      // Whether there are corresponding results or not 
+      // Whether there are corresponding results or not
       if (filteredRestaurants.length === 0) {
         res.render('error', { keyword })
       } else {
@@ -33,6 +31,5 @@ router.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-// export router 
+// export router
 module.exports = router
