@@ -25,9 +25,10 @@ module.exports = app => {
         bcrypt.compare(password, user.password).then(isMatched => {
           if (!isMatched) {
             return done(null, false, req.flash('loginError', 'Email or Password incorrect'))
+          } else {
+            return done(null, user)
           }
         })
-        return done(null, user)
       })
       .catch(err => done(err, false))
   }))
